@@ -1,0 +1,13 @@
+name: AdvanciusStaffList
+version: '1.0'
+main: net.advancius.bungeestafflist.BungeeStaffList
+description: Advancius online staff list plugin
+author: Advancius
+commands:
+  stafflist:
+    description: View online staff
+    aliases:
+      - sl
+      - staff
+      - slist
+      - staffl
