@@ -18,3 +18,26 @@ advancius.staff - Allows user to be shown in staff list. Also shows hidden playe
 
 advancius.canhide - Allows user to hide themselves from staff list
 
+## Staff List Order
+Order pulled from /lpb track staff info<br>
+<br>[Owner]<br>
+[HeadDev]<br>
+[HeadStaffManager]<br>
+[HeadMod]<br>
+[HeadCommunityManager]<br>
+[HeadBuilder]<br>
+[SrDev]<br>
+[SrStaffManager]<br>
+[SrMod]<br>
+[SrCommunityManager]<br>
+[SrBuilder]<br>
+[Dev]<br>
+[StaffManager]<br>
+[Mod]<br>
+[CommunityManager]<br>
+[Builder]<br>
+[JrDev]<br>
+[JrStaffManager]<br>
+[JrMod]<br>
+[JrCommunityManager]<br>
+[JrBuilder]
