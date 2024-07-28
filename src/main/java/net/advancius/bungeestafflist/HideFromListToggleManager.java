@@ -13,4 +13,8 @@ public class HideFromListToggleManager {
     public void setToggleState(UUID playerId, boolean state) {
         playerToggleState.put(playerId, state);
     }
+
+    public void resetToggleState(UUID playerId) {
+        playerToggleState.put(playerId, false);
+    }
 }

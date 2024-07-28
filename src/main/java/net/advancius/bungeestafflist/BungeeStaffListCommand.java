@@ -57,20 +57,28 @@ public class BungeeStaffListCommand extends Command {
         ArrayList<String> format = new ArrayList<>();
          // Existing logic
         ProxyServer.getInstance().getPlayers().forEach(player -> {
+            User user = luckPerms.getUserManager().getUser(player.getUniqueId());
+            GroupManager groupManager = luckPerms.getGroupManager();
+            TrackManager trackManager = luckPerms.getTrackManager();
+            Track staffTrack = trackManager.getTrack("staff");
+            String prefix = "&a";
             UUID playerId = player.getUniqueId();
             HideFromListToggleManager hideFromListToggleManager = BungeeStaffList.getHideFromStaffListToggleManager();
+            // add all users not currently hidden from staff list to format
             if (player.hasPermission("advancius.staff") && (!hideFromListToggleManager.getToggleState(player.getUniqueId()))) {
-                User user = luckPerms.getUserManager().getUser(player.getUniqueId());
-                GroupManager groupManager = luckPerms.getGroupManager();
-                TrackManager trackManager = luckPerms.getTrackManager();
-                Track staffTrack = trackManager.getTrack("staff");
-                String prefix = "&a";
                 for (int i = 0; i < staffTrack.getGroups().size(); i++) {
                     if (user.getInheritedGroups(QueryOptions.defaultContextualOptions()).contains(groupManager.getGroup(staffTrack.getGroups().get(i))))
                         prefix = groupManager.getGroup(staffTrack.getGroups().get(i)).getCachedData().getMetaData().getPrefix();
-                        //prefix = String.valueOf(luckPerms.getPlayerAdapter(BungeeStaffListCommand.class).getMetaData((BungeeStaffListCommand) player));
                 }
                 format.add("&7" + prefix + player.getName() + " &7- &e" + player.getServer().getInfo().getName());
+            }
+            // add users currently hidden from staff list to format if sender is staff
+            if (sender.hasPermission("advancius.staff") && (hideFromListToggleManager.getToggleState(player.getUniqueId()))) {
+                for (int i = 0; i < staffTrack.getGroups().size(); i++) {
+                    if (user.getInheritedGroups(QueryOptions.defaultContextualOptions()).contains(groupManager.getGroup(staffTrack.getGroups().get(i))))
+                        prefix = groupManager.getGroup(staffTrack.getGroups().get(i)).getCachedData().getMetaData().getPrefix();
+                }
+                format.add("&7(Hidden) " + prefix + player.getName() + " &7- &e" + player.getServer().getInfo().getName());
             }
         });
 
@@ -83,9 +91,9 @@ public class BungeeStaffListCommand extends Command {
                 Integer order1 = getOrderIndex(o1, orderMap);
                 Integer order2 = getOrderIndex(o2, orderMap);
 
-                // Consistent default order for items not in the custom order list
+                // default order for items not in custom order list
                 if (order1 == null) {
-                    order1 = order.size(); // Place at end
+                    order1 = order.size(); // place at end
                 }
                 if (order2 == null) {
                     order2 = order.size();

@@ -23,21 +23,17 @@ public class HideFromList extends Command {
             ProxiedPlayer player = (ProxiedPlayer) sender;
             UUID playerId = player.getUniqueId();
 
-            // Get the current toggle state
             boolean currentState = toggleManager.getToggleState(playerId);
 
             if (currentState) {
                 sender.sendMessage((BaseComponent)new TextComponent(ChatColor.translateAlternateColorCodes('&', "&aYou are no longer hidden from staff list!")));
-                // Perform task A
             } else {
                 sender.sendMessage((BaseComponent)new TextComponent(ChatColor.translateAlternateColorCodes('&', "&cYou are now hidden from staff list!")));
-                // Perform task B
             }
 
-            // Toggle the state
             toggleManager.setToggleState(playerId, !currentState);
         } else {
-            sender.sendMessage("This command can only be run by a player.");
+            sender.sendMessage((BaseComponent)new TextComponent("This command may only be executed by a player.") );
         }
     }
 }

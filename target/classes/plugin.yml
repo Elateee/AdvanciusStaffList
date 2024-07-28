@@ -11,3 +11,5 @@ commands:
       - staff
       - slist
       - staffl
+  hide:
+    description: Hide from staff list
